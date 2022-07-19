@@ -9,6 +9,8 @@ public class main {
 	static List<Eleve> eleves = new ArrayList<Eleve>();
 	static Scanner sc = new Scanner(System.in);
 
+	
+	
 	public static void main(String[] args) {
 		
 		// Init datas
@@ -23,25 +25,27 @@ public class main {
 		// First Time - Add notes and Students
 		while (true) {
 			System.out.print("Ajouter une nouvelle note ou quitter (q)");
-			String response1 = sc.nextLine(); 
+			String note = sc.nextLine(); 
 
-			if (response1.equals("q")) break;
+			if (note.equals("q")) break;
 
 			System.out.print("Sélectionner le nom de l'élève pour cette note ? ");
-			String response2 = sc.nextLine();
+			String nom = sc.nextLine();
 			
 			boolean foundedElev = false;
 			for (int i=0; i<eleves.size(); i++) {
-				if (eleves.get(i).getNom().equals(response2) ) {
-					eleves.get(i).addNote(Double.parseDouble(response1));
+			//for (Eleve e: eleves) {
+				if (eleves.get(i).getNom().equals(nom) ) {
+					eleves.get(i).addNote(Double.parseDouble(note));
 					foundedElev = true;
 					break;
 				}
 		    }
 			if (!foundedElev) {
-				System.out.print("Prenom élève ? "); String b = sc.nextLine();
-				Eleve elevNew = new Eleve(response2, b);
-				elevNew.addNote(Double.parseDouble(response1));
+				System.out.print("Prenom élève ? ");
+				String prenom = sc.nextLine();
+				Eleve elevNew = new Eleve(nom, prenom);
+				elevNew.addNote(Double.parseDouble(note));
 				eleves.add(elevNew);
 			}
 		}
@@ -51,7 +55,7 @@ public class main {
 		while (true) {
 			System.out.println("\nChoix ?\n"
 					+ "a. Afficher toutes les notes\n"
-					+ "b. Afficher les notes d'une élève les notes\n"
+					+ "b. Afficher les notes d'un élève\n"
 					+ "c. Afficher la moyenne des notes total\n"
 					+ "q. Quitter le programme\r\n");
 			String response = sc.nextLine();
