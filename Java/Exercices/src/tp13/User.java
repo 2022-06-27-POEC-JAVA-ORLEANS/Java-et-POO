@@ -5,9 +5,11 @@ public class User {
 	protected String nom;
 	protected String prenom;
 	protected int age;
-	protected Categorie categorie;
+	protected Categorie categorie = Categorie.UNDEFINED;
 	
-	public User() { }
+	public User() {
+		this.categorie = Categorie.UNDEFINED;
+	}
 	
 	public User (String n, String p, int age) {
 		this.nom = n;

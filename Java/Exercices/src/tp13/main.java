@@ -16,7 +16,7 @@ public class main {
 			int age = Integer.parseInt(sc.nextLine());
 			User inscrit = new User(result1, result2, age);
 
-			try {		
+			try {
 				System.out.print("Categorie ?\n a.ENFANT\n b.IS_15_TO_17\n c.SENIOR:");
 				String cat = sc.nextLine();
 				Categorie catReel = Categorie.UNDEFINED;
@@ -26,7 +26,7 @@ public class main {
 					case "c": catReel = Categorie.SENIOR; break;
 					default : catReel = Categorie.UNDEFINED; break;
 				}
-				checkCategorie(age, catReel);
+				checkCategorie(inscrit.getAge(), catReel);
 				inscrit.setCategorie(catReel);	
 			} catch (CategorieException e) {
 				System.out.print(e);
@@ -40,7 +40,8 @@ public class main {
 		if (age < 18 && categorie.equals(Categorie.SENIOR)
 				|| age < 15 && !categorie.equals(Categorie.ENFANT)
 				|| age >= 15 && categorie.equals(Categorie.ENFANT)
-				|| categorie.equals(Categorie.UNDEFINED))
+				|| categorie.equals(Categorie.UNDEFINED)
+				|| age >= 18 && !categorie.equals(Categorie.SENIOR))
 			throw new CategorieException(categorie.toString());
 
 	}

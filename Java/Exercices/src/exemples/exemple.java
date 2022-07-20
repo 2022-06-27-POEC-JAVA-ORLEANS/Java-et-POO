@@ -2,11 +2,12 @@ package exemples;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 public class exemple {
 
-	public static void main(String[] args) throws ExempleException {
+	public static void main(String[] args) throws ExempleException, SQLException {
 
 		// Exemple 1 - Les bases
 		/*System.out.println("Lancement du programme !");
@@ -47,23 +48,53 @@ public class exemple {
 
 
 		// Exemple 4 - Exceptions
-		try {
+		/*try {
 			Ecole ecole1 = new Ecole("B");
 			Ecole ecole2 = new Ecole("A");
 			checkValidityEcole(ecole1);
 			checkValidityEcole(ecole2);
 		} catch (ExempleException e) {
 			System.out.println(e);
+		}*/
+		
+		
+		
+		// Exemple 5 - JDBC POSTGRES
+
+		// 1. Charge le Driver + 2. Connexion (url + ids)
+		try {
+			Class.forName("org.postgresql.Driver");
+			Connection conn = DriverManager.getConnection(
+					"jdbc:postgresql://localhost:5432/site_internet", "usersite", "usersite");
+			
+			// 3. Request + 4.Execution
+			Statement stmt = conn.createStatement();
+			ResultSet res = stmt.executeQuery("SELECT * FROM page");
+			
+			// 5. Lire rï¿½sultats
+			while(res.next()) {
+				System.out.println(res.getInt(1));
+				System.out.println(res.getString(2));
+				System.out.println(res.getString(3));
+			}
+			
+			// 6. Fermer connexion
+			conn.close();
+			
+			
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
 		}
+
 	}
-	
-	
-	
-	
+
+
+
+
 
 	public static void checkValidityEcole(Ecole ecole) throws ExempleException {
 		if (ecole.getNom().equals("A")) {
-			throw new ExempleException("Problème sur le nom de l'Ecole " + ecole);
+			throw new ExempleException("Problï¿½me sur le nom de l'Ecole " + ecole);
 		}
 	}
 }
