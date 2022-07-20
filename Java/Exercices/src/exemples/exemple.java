@@ -1,9 +1,12 @@
 package exemples;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import tp06.Type;
 
 public class exemple {
 
@@ -62,7 +65,7 @@ public class exemple {
 		// Exemple 5 - JDBC POSTGRES
 
 		// 1. Charge le Driver + 2. Connexion (url + ids)
-		try {
+		/*try {
 			Class.forName("org.postgresql.Driver");
 			Connection conn = DriverManager.getConnection(
 					"jdbc:postgresql://localhost:5432/site_internet", "usersite", "usersite");
@@ -85,9 +88,38 @@ public class exemple {
 		} catch (ClassNotFoundException e1) {
 			e1.printStackTrace();
 		}
+		*/
+		
+		
+		
+		// Exemple 5.2 - JDBC POSTGRES - INSERT
+
+		// 1. Charge le Driver + 2. Connexion (url + ids)
+		try {
+			Class.forName("org.postgresql.Driver");
+			Connection conn = DriverManager.getConnection(
+					"jdbc:postgresql://localhost:5432/site_internet", "usersite", "usersite");
+			
+			// Preparer request
+			PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO site VALUES (?, ?)");
+			
+			// Insertion des donn�es pour la requ�te
+            preparedStatement.setString(1, "http://mysite3.fr");
+            preparedStatement.setString(2, "EN");
+            System.out.println(preparedStatement);
+            
+            // Execution de la requ�te
+            preparedStatement.executeUpdate();
+			
+			// 6. Fermer connexion
+			conn.close();
+			
+			
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
 
 	}
-
 
 
 
