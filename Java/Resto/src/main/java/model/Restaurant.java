@@ -24,6 +24,20 @@ public class Restaurant {
 	}
 	
 	
+
+	public void addSalarie(Salarie salarie) {
+		this.salaries.add(salarie);
+	}
+	
+	@Override
+	public String toString() {
+		String msg = this.nom + " (" + this.code + "): ";
+		for (Salarie s: this.salaries) {
+			msg += s.getNom() +" "+ s.getPrenom() + " ";
+		}
+		return msg;
+	}
+	
 	
 	
 	
