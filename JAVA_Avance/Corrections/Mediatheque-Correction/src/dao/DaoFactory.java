@@ -25,7 +25,7 @@ public class DaoFactory {
 		if ( DaoFactory.instanceSingleton == null ) {
 			try {
 			      Class.forName("com.mysql.jdbc.Driver");
-;
+
 			      DaoFactory.instanceSingleton = new DaoFactory("jdbc:mysql://localhost/mediatheque","root","");
 			} catch(ClassNotFoundException e) {
 				e.printStackTrace();
@@ -39,6 +39,9 @@ public class DaoFactory {
 		return new RealisateurDaoImpl( this );
 	}
 	
+	public FilmDao getFilmDao() {
+		return new FilmDaoImpl( this );
+	}
 
 	Connection getConnection() throws SQLException {
 		if ( this.con == null ) {

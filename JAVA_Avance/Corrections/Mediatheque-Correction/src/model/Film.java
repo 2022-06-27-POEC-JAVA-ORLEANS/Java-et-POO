@@ -62,7 +62,11 @@ public class Film {
 
 	@Override
 	public String toString() {
-		return getId() + " : " + getTitre() + " de " + getRealisateur().getPrenom() + " " + getRealisateur().getNom() + " / " + getDureeMinutes() + " minutes / Genre : " + getGenre();
+		if(getRealisateur() != null) {
+			return getId() + " : " + getTitre() + " de " + getRealisateur().getPrenom() + " " + getRealisateur().getNom() + " / " + getDureeMinutes() + " minutes / Genre : " + getGenre();
+		} else {
+			return getId() + " : " + getTitre() + " de INCONNU / " + getDureeMinutes() + " minutes / Genre : " + getGenre();
+		}
 	}
 	
 	
