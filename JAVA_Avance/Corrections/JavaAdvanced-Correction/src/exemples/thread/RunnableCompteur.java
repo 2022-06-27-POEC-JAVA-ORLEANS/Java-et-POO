@@ -48,6 +48,9 @@ public class RunnableCompteur implements Runnable {
       thread.start();
     }
 
+    RunnableCompteur mohamatCompteur = new RunnableCompteur("Mohamat");
+    Thread mohamatThread =  new Thread(mohamatCompteur) ;
+    mohamatThread.start();
     
   }
   

@@ -54,6 +54,10 @@ public class ThreadCompteur extends Thread {
       compteurs[i].start();
     }
 
+    ThreadCompteur mohamatCompteur = new ThreadCompteur("Mohamat");
+    mohamatCompteur.start();
+    
+    
     
   }
   
